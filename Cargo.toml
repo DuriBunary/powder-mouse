@@ -1,0 +1,24 @@
+[package]
+name = "daxa-control"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+description = "A lightweight control app for the Daxa Air Mini Wireless mouse"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+eframe = { version = "0.37", default-features = false, features = ["accesskit", "default_fonts", "glow"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+png = { version = "0.18.1", default-features = false }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+hidapi = { version = "=2.6.7", default-features = false, features = ["windows-native"] }
+rfd = { version = "0.15.4", default-features = false }
+tray-icon = { version = "0.24.2", default-features = false }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
